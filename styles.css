@@ -1,0 +1,557 @@
+@import './assets/icons/bootstrap-icons/font/bootstrap-icons.css';
+@import './assets/icons/fontawesome-free-6.0.0-web/css/all.css';
+
+@font-face {
+  font-family: Graphik;
+  src: url(./assets/fonts/Graphik-Font-Family/GraphikLight.otf);
+}
+
+@font-face {
+  font-family: Graphik-bold;
+  src: url(./assets/fonts/Graphik-Font-Family/GraphikSemibold.otf);
+}
+
+@font-face {
+  font-family: Blacklisted;
+  src: url(./assets/fonts/Blacklisted.ttf);
+}
+@font-face {
+  font-family: 'Font Awesome 6 Brands';
+  src: url(./assets/icons/fontawesome-free-6.0.0-web/webfonts/fa-brands-400.ttf);
+}
+
+@font-face {
+  font-family: 'Font Awesome 6 Free';
+  src: url(./assets/icons/fontawesome-free-6.0.0-web/webfonts/fa-solid-900.ttf);
+}
+
+:root {
+  --purple-main: rgb(160, 108, 213);
+  --purple-light: rgb(184, 147, 221);
+  --purple-dark: rgb(130, 71, 190);
+  --black-main: #141414;
+  --black-light: #252526;
+  --font: Graphik, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-bold: Graphik-bold, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-special: Blacklisted, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --fa-font-brands: 'Font Awesome 6 Brands';
+  --fa-font-solid: 'Font Awesome 6 Free';
+}
+
+body {
+  position: relative;
+  background-image: url('./assets/images/PolygonLuminary.svg');
+  background-size: cover;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+button {
+  font-family: var(--font);
+}
+
+button {
+  background: var(--purple-main);
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 0;
+  border-radius: 3px;
+  padding: 0.7rem 1.7rem;
+  cursor: pointer;
+}
+
+.bi {
+  color: white;
+  font-size: 1.8rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+#blur-container {
+  background: rgba(0, 0, 0, 0);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  /* pointer-events: none; */
+  z-index: 0;
+  transition: background 0.5s;
+}
+
+#blur-container.blur {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+#container {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  grid-template:
+    'header banner' auto
+    'sidebar sidebar' auto
+    'content content' 1fr
+    / 1fr auto;
+  align-items: center;
+}
+
+.header,
+.sidebar,
+.content {
+  padding: 1rem;
+}
+
+.header {
+  grid-area: header;
+  font-family: var(--font-bold);
+  font-size: min(3vw, 2rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 10vh;
+  margin-top: 1rem;
+}
+
+.banner {
+  grid-area: banner;
+  font-size: 3rem;
+  position: absolute;
+  top: 1.5rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.banner > .title {
+  position: relative;
+  font-family: var(--font-special);
+  left: -6rem;
+  text-shadow: 2px 0 10px black;
+  font-size: 0.4em;
+  z-index: 2;
+
+  transition: transform 1s, z-index 1s, text-shadow 1s;
+}
+
+.banner > .logo {
+  position: relative;
+  left: 1rem;
+  filter: drop-shadow(3px 3px 3px white);
+  width: 5rem;
+  opacity: 1;
+  z-index: 1;
+
+  transition: transform 1s, z-index 1s, filter 1s;
+}
+
+.banner:hover > .logo {
+  transform: translate(-2rem);
+  z-index: 2;
+  filter: drop-shadow(3px 3px 3px var(--purple-main));
+}
+.banner:hover > .title {
+  transform: translate(30px);
+  z-index: 1;
+  text-shadow: 2px 0 10px white;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  display: grid;
+  grid-template:
+    'filter filter' auto
+    'add-btn .' auto / auto 1fr;
+  gap: 1rem;
+}
+
+.new-resource-btn {
+  grid-area: add-btn;
+}
+
+.filter {
+  grid-area: filter;
+  background: rgba(130, 71, 190, 0.2);
+  display: flex;
+}
+
+.filter-title {
+  padding: 1rem;
+  flex: 1;
+}
+
+@media screen and (max-width: 640px) {
+  .header {
+    min-height: auto;
+  }
+  .banner {
+    display: none;
+  }
+  .filter {
+    flex-direction: column;
+  }
+}
+
+.filter .element {
+  all: unset;
+  padding: 1rem 2rem;
+  cursor: pointer;
+}
+
+.filter .element:hover {
+  background: rgba(130, 71, 190, 0.2);
+}
+
+.filter .element.active {
+  background: rgba(130, 71, 190, 0.4);
+}
+
+.content {
+  grid-area: content;
+}
+
+.add-resource-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.library {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  align-self: center;
+  gap: 3rem;
+}
+
+.card {
+  background: rgba(20, 20, 20, 0.6);
+  border: 1px solid white;
+  padding: 1rem;
+  text-align: center;
+
+  display: grid;
+  grid-template:
+    'card-modif card-title card-delete' auto
+    'card-website card-website card-website' auto
+    'card-desc card-desc card-desc' auto
+    'card-footer card-footer card-footer' auto
+    / 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.card:hover,
+.card.active:hover {
+  background: rgba(130, 71, 190, 0.2);
+}
+
+.card.active {
+  background: rgba(130, 71, 190, 0.5);
+}
+
+.card-title {
+  grid-area: card-title;
+  font-family: var(--font-bold);
+}
+
+.card-website {
+  grid-area: card-website;
+  color: var(--purple-main);
+  text-decoration: none;
+  font-style: italic;
+}
+
+.card-description {
+  grid-area: card-desc;
+}
+
+.card-modif {
+  grid-area: card-modif;
+  all: unset;
+  color: #fbaf00;
+  justify-self: start;
+  cursor: pointer;
+}
+
+.card-modif:hover {
+  color: #f5cd70;
+}
+
+.card-modif::before {
+  font-family: var(--fa-font-solid);
+  font-size: 1.5rem;
+  content: '\f303';
+}
+
+.card-delete {
+  grid-area: card-delete;
+  all: unset;
+  color: #a64253;
+  justify-self: end;
+  cursor: pointer;
+}
+
+.card-delete:hover {
+  color: #cb7c89;
+}
+
+.card-delete::before {
+  font-family: var(--fa-font-solid);
+  font-size: 1.5rem;
+  content: '\f410';
+}
+
+.card-footer {
+  grid-area: card-footer;
+  display: grid;
+  grid-template: 'card-category card-read' auto / 1fr auto;
+  align-items: flex-end;
+}
+
+.card-read {
+  grid-area: card-read;
+  justify-content: end;
+  gap: 0.5rem;
+}
+
+.card-read input {
+  z-index: -1;
+}
+
+.card-category {
+  position: relative;
+  grid-area: card-category;
+  font-size: 1.5rem;
+  justify-self: start;
+  display: flex;
+  align-items: center;
+}
+
+.card-category > i {
+  font-family: var(--font);
+  font-size: 1rem;
+  font-style: normal;
+}
+
+.card-category > i::before {
+  font-family: var(--fa-font-brands);
+  margin-right: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.card-category .Global::before {
+  font-family: var(--fa-font-solid);
+  content: '\f0ac';
+}
+
+.card-category .Web3 {
+  color: #ded1e4;
+}
+
+.card-category .Web3::before {
+  content: '\f42e';
+}
+
+.card-category .JavaScript {
+  color: #f0db4f;
+}
+
+.card-category .JavaScript::before {
+  content: '\f3b9';
+}
+
+.card-category .CSS {
+  color: #5fb0dc;
+}
+
+.card-category .CSS::before {
+  content: '\f38b';
+}
+
+/* FORM */
+
+form {
+  position: absolute;
+  background: var(--black-main);
+  padding: 2rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+legend {
+  font-size: 2rem;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.close-btn {
+  all: unset;
+  position: absolute;
+  color: var(--purple-main);
+  font-size: 1.5rem;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.form-content {
+  display: grid;
+  grid-template-columns: auto;
+  gap: 10px;
+}
+
+.form-content > div {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input[type='text'],
+textarea {
+  font-family: var(--font);
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid var(--purple-main);
+  padding: 0.3rem;
+}
+
+input[type='text'] {
+  width: 20rem;
+  height: 1.3rem;
+}
+
+.placeholder::after {
+  content: attr(value);
+  position: absolute;
+  color: var(--purple-main);
+  font-size: 0.9rem;
+  font-style: italic;
+  top: 2.3rem;
+  left: 0.3rem;
+}
+
+input:not(:placeholder-shown) ~ .placeholder::after,
+input:focus ~ .placeholder::after,
+textarea:not(:placeholder-shown) ~ .placeholder::after,
+textarea:focus ~ .placeholder::after {
+  display: none;
+}
+
+input[type='text']:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0px 0px 5px #ffffff;
+  border: 2px solid var(--purple-main);
+}
+
+input[type='text']:not(:placeholder-shown):valid + span::after,
+textarea:not(:placeholder-shown):valid + span::after {
+  position: absolute;
+  content: '✔';
+  font-size: 0.8rem;
+  color: var(--purple-main);
+
+  top: 0.3rem;
+  right: 0;
+  padding: 0 10px;
+}
+
+.category-list {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  margin-bottom: 1rem;
+}
+
+.category-list > button {
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid rgba(184, 147, 221, 0.3);
+  cursor: pointer;
+}
+
+.form-element.read,
+.card-read {
+  background: rgba(130, 71, 190, 0.2);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.form-element.read {
+  justify-content: space-between;
+}
+
+.form-element.read:hover,
+.category-list > button:hover,
+.card-read:hover {
+  background: rgba(130, 71, 190, 0.4);
+}
+
+.form-element.read.active,
+.category-list > button.active,
+.card-read.active {
+  background: rgba(130, 71, 190, 0.7);
+}
+
+input#read {
+  width: 2rem;
+  height: 2rem;
+  z-index: -1;
+}
+
+input[type='checkbox'] {
+  appearance: none;
+  overflow: hidden;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 1rem;
+  border: 2px solid var(--purple-main);
+}
+
+input[type='checkbox']:checked {
+  border: 2px solid var(--purple-main);
+}
+
+input[type='checkbox']::before {
+  display: block;
+
+  content: ' ';
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1rem;
+  background-color: var(--purple-main);
+  font-size: 1.2em;
+  transform: translate(-1rem) scale(0);
+  transform-origin: center;
+  transition: all 0.3s ease-in;
+}
+
+input[type='checkbox']:checked::before {
+  transform: translate(-0.5rem, -0.5rem) scale(1);
+  transition: all 0.3s;
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
