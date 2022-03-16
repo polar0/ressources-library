@@ -508,7 +508,7 @@ textarea:not(:placeholder-shown):valid + span::after {
 
 .form-element.read.active,
 .category-list > button.active,
-.card-read.active {
+.card.active .card-read {
   background: rgba(130, 71, 190, 0.7);
 }
 
