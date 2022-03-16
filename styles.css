@@ -1,3 +1,5 @@
+/* --------------------------------- GLOBAL --------------------------------- */
+
 @import './assets/icons/bootstrap-icons/font/bootstrap-icons.css';
 @import './assets/icons/fontawesome-free-6.0.0-web/css/all.css';
 
@@ -40,6 +42,8 @@
   --fa-font-brands: 'Font Awesome 6 Brands';
   --fa-font-solid: 'Font Awesome 6 Free';
 }
+
+/* ------------------------------ GENERAL STYLE ----------------------------- */
 
 body {
   position: relative;
@@ -96,10 +100,10 @@ ul {
   min-height: 100vh;
   display: grid;
   grid-template:
-    'header banner' auto
+    'banner header' auto
     'sidebar sidebar' auto
     'content content' 1fr
-    / 1fr auto;
+    / auto 1fr;
   align-items: center;
 }
 
@@ -108,6 +112,8 @@ ul {
 .content {
   padding: 1rem;
 }
+
+/* --------------------------------- HEADER --------------------------------- */
 
 .header {
   grid-area: header;
@@ -125,7 +131,7 @@ ul {
   font-size: 3rem;
   position: absolute;
   top: 1.5rem;
-  right: 1rem;
+  left: 3rem;
   display: flex;
   align-items: center;
 }
@@ -163,6 +169,8 @@ ul {
   text-shadow: 2px 0 10px white;
 }
 
+/* ---------------------------------- MENU ---------------------------------- */
+
 .sidebar {
   grid-area: sidebar;
   display: grid;
@@ -187,18 +195,6 @@ ul {
   flex: 1;
 }
 
-@media screen and (max-width: 640px) {
-  .header {
-    min-height: auto;
-  }
-  .banner {
-    display: none;
-  }
-  .filter {
-    flex-direction: column;
-  }
-}
-
 .filter .element {
   all: unset;
   padding: 1rem 2rem;
@@ -212,6 +208,20 @@ ul {
 .filter .element.active {
   background: rgba(130, 71, 190, 0.4);
 }
+
+@media screen and (max-width: 640px) {
+  .header {
+    min-height: auto;
+  }
+  .banner {
+    display: none;
+  }
+  .filter {
+    flex-direction: column;
+  }
+}
+
+/* -------------------------------- CONTENT --------------------------------- */
 
 .content {
   grid-area: content;
@@ -229,6 +239,8 @@ ul {
   align-self: center;
   gap: 3rem;
 }
+
+/* -------------------- CARD GENERAL -------------------- */
 
 .card {
   background: rgba(20, 20, 20, 0.6);
@@ -271,6 +283,8 @@ ul {
   grid-area: card-desc;
 }
 
+/* --------------------- CARD MODIF --------------------- */
+
 .card-modif {
   grid-area: card-modif;
   all: unset;
@@ -288,6 +302,8 @@ ul {
   font-size: 1.5rem;
   content: '\f303';
 }
+
+/* --------------------- CARD DELETE -------------------- */
 
 .card-delete {
   grid-area: card-delete;
@@ -307,12 +323,16 @@ ul {
   content: '\f410';
 }
 
+/* --------------------- CARD FOOTER -------------------- */
+
 .card-footer {
   grid-area: card-footer;
   display: grid;
   grid-template: 'card-category card-read' auto / 1fr auto;
   align-items: flex-end;
 }
+
+/* ----------- CARD READ ----------- */
 
 .card-read {
   grid-area: card-read;
@@ -323,6 +343,8 @@ ul {
 .card-read input {
   z-index: -1;
 }
+
+/* --------- CARD CATEGORY --------- */
 
 .card-category {
   position: relative;
@@ -374,7 +396,7 @@ ul {
   content: '\f38b';
 }
 
-/* FORM */
+/* -------------------- FORM GENERAL -------------------- */
 
 form {
   position: absolute;
@@ -417,6 +439,14 @@ legend {
   flex-direction: column;
   gap: 10px;
 }
+
+.submit {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* ------------------ FORM INPUT (Text) ----------------- */
 
 input[type='text'],
 textarea {
@@ -468,6 +498,8 @@ textarea:not(:placeholder-shown):valid + span::after {
   padding: 0 10px;
 }
 
+/* -------------------- FORM CATEGORY ------------------- */
+
 .category-list {
   display: grid;
   grid-template-columns: repeat(4, auto);
@@ -483,6 +515,8 @@ textarea:not(:placeholder-shown):valid + span::after {
   border: 1px solid rgba(184, 147, 221, 0.3);
   cursor: pointer;
 }
+
+/* ---------------------- FORM READ --------------------- */
 
 .form-element.read,
 .card-read {
@@ -511,6 +545,8 @@ textarea:not(:placeholder-shown):valid + span::after {
 .card.active .card-read {
   background: rgba(130, 71, 190, 0.7);
 }
+
+/* ---------------- FORM INPUT (Checkbox) --------------- */
 
 input#read {
   width: 2rem;
@@ -548,10 +584,4 @@ input[type='checkbox']::before {
 input[type='checkbox']:checked::before {
   transform: translate(-0.5rem, -0.5rem) scale(1);
   transition: all 0.3s;
-}
-
-.submit {
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
 }
