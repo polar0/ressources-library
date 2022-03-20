@@ -58,34 +58,35 @@ filterSelector.forEach((button) => {
 // -------------------------- CREATING THE RESOURCE ---------------------------
 
 // Create a new resource with unique values
-function Resource(title, website, desc, category, read) {
-  this.title = title;
-  this.website = website;
-  this.desc = desc;
-  this.category = category;
-  this.read = read;
-}
-
-// Prototype function for all resources
-Resource.prototype.displayResource = function () {
-  const card = document.createElement('div');
-  card.setAttribute('class', 'card');
-  card.setAttribute('value', library.indexOf(this) + 1);
-
-  const cardContent = new Card(
-    this.title,
-    this.website,
-    this.desc,
-    this.category,
-    this.read,
-  );
-
-  // Attach the value to the card
-  for (const x of cardContent) {
-    card.appendChild(x);
+class Resource {
+  constructor(title, website, desc, category, read) {
+    this.title = title;
+    this.website = website;
+    this.desc = desc;
+    this.category = category;
+    this.read = read;
   }
-  libraryContainer.appendChild(card);
-};
+
+  displayResource() {
+    const card = document.createElement('div');
+    card.setAttribute('class', 'card');
+    card.setAttribute('value', library.indexOf(this) + 1);
+
+    const cardContent = new Card(
+      this.title,
+      this.website,
+      this.desc,
+      this.category,
+      this.read,
+    );
+
+    // Attach the value to the card
+    for (const x of cardContent) {
+      card.appendChild(x);
+    }
+    libraryContainer.appendChild(card);
+  }
+}
 
 // How to display the resource on the page
 function Card(title, website, desc, category, read) {
