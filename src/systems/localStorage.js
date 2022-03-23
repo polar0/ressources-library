@@ -1,20 +1,21 @@
-function inspectLocalStorage(item, value) {
-  if (!localStorage.getItem(item)) {
-    populateLocalStorage(item, value);
+import { updateLibrary } from '../components/library';
+
+function inspectLocalStorage() {
+  if (!localStorage.getItem('library')) {
+    populateLocalStorage('library');
   } else {
     setFromLocalStorage();
   }
 }
 
-function populateLocalStorage(item, value) {
-  localStorage.setItem(item, value);
-  setFromLocalStorage();
+function populateLocalStorage(library) {
+  localStorage.setItem('library', JSON.stringify(library));
+  setFromLocalStorage(library);
 }
 
-function setFromLocalStorage() {
-  let currentColor = localStorage.getItem('bgColor');
-  const body = document.querySelector('body');
-  body.style.background = currentColor;
+function setFromLocalStorage(library) {
+  library = JSON.parse(localStorage.getItem('library'));
+  updateLibrary(library);
 }
 
 export { inspectLocalStorage, populateLocalStorage };
