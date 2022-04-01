@@ -70,9 +70,9 @@ function addResourceToLibrary(title, website, desc, category, read) {
 // Update the page display with the array content
 function updateLibrary(storedLib) {
   library = storedLib;
+  if (storedLib.length === 0) storedLib = library;
   // Remove all cards
   libraryContainer.textContent = '';
-  console.log(storedLib);
   for (let i = 0; i < storedLib.length; i++) {
     storedLib[i] = Object.assign(new Resource(), storedLib[i]);
     // Display all cards if 'All' filter is selected
