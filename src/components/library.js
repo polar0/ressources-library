@@ -70,17 +70,18 @@ function addResourceToLibrary(title, website, desc, category, read) {
 // Update the page display with the array content
 function updateLibrary(storedLib) {
   library = storedLib;
-  if (storedLib.length === 0) storedLib = library;
+  if (library.length === 0) return;
+
   // Remove all cards
   libraryContainer.textContent = '';
   for (let i = 0; i < storedLib.length; i++) {
-    storedLib[i] = Object.assign(new Resource(), storedLib[i]);
+    library[i] = Object.assign(new Resource(), storedLib[i]);
     // Display all cards if 'All' filter is selected
     if (filter === 'all') {
-      storedLib[i].displayResource(i);
+      library[i].displayResource(i);
       // Or only display the category selected
     } else if (storedLib[i].category === filter) {
-      storedLib[i].displayResource(i);
+      library[i].displayResource(i);
     }
   }
   // Update all read status

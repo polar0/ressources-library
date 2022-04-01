@@ -14,7 +14,6 @@ function Resource(title, website, desc, category, read) {
 }
 
 Resource.prototype.displayResource = function (index) {
-  console.log(index);
   const card = document.createElement('div');
   card.setAttribute('class', 'card');
   card.setAttribute('value', index + 1);
