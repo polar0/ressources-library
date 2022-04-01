@@ -1,8 +1,8 @@
 import { Resource } from './resource';
 import { createForm, displayForm, hideForm } from './form';
 import {
-  inspectLocalStorage,
   populateLocalStorage,
+  setFromLocalStorage,
 } from '../systems/localStorage';
 
 const form = document.querySelector('form');
@@ -16,7 +16,6 @@ let isModifiedIndex = -1;
 let filter = 'all';
 
 // -------------------------- GLOBAL EVENT LISTENERS --------------------------
-
 // Display the form to add a new resource
 newResourceBtn.addEventListener('click', function () {
   displayForm('add');
@@ -63,24 +62,21 @@ function addResourceToLibrary(title, website, desc, category, read) {
     library.push(resource);
   }
   // Update the display
-  //   updateLibrary();
   populateLocalStorage(library);
 }
 
 // Update the page display with the array content
-function updateLibrary(storedLib) {
-  library = storedLib;
-  if (library.length === 0) return;
-
+function updateLibrary(storedLibrary) {
+  library = storedLibrary;
   // Remove all cards
   libraryContainer.textContent = '';
-  for (let i = 0; i < storedLib.length; i++) {
-    library[i] = Object.assign(new Resource(), storedLib[i]);
+  for (let i = 0; i < library.length; i++) {
+    library[i] = Object.assign(new Resource(), library[i]);
     // Display all cards if 'All' filter is selected
     if (filter === 'all') {
       library[i].displayResource(i);
       // Or only display the category selected
-    } else if (storedLib[i].category === filter) {
+    } else if (library[i].category === filter) {
       library[i].displayResource(i);
     }
   }
@@ -164,7 +160,7 @@ function deleteResource() {
   let index = this.parentNode.getAttribute('value');
   library.splice(index - 1, 1);
   this.parentNode.remove();
-  // Update the display after it's deleted from the array
+  // Update the display and the local storage after it's deleted from the array
   populateLocalStorage(library);
 }
 
@@ -231,6 +227,12 @@ function filterLibrary() {
   // Filter the display and update it
   filter = this.classList[1];
   updateLibrary(library);
+}
+
+function inspectLocalStorage() {
+  if (localStorage.getItem('library') !== null) {
+    setFromLocalStorage(library);
+  }
 }
 
 export {
